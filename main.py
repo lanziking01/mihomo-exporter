@@ -12,6 +12,7 @@ registry = CollectorRegistry()
 fast_proxies_all = list()
 normal_proxies_all = list()
 
+
 def get_all_proxies():
 
     response = requests.get(url)
@@ -99,4 +100,3 @@ def get_all():
 if __name__ == '__main__':
     #start_http_server(9090)
     app.run(host='0.0.0.0', port=9090)
-
