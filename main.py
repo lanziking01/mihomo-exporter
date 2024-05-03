@@ -12,7 +12,6 @@ registry = CollectorRegistry()
 fast_proxies_all = list()
 normal_proxies_all = list()
 
-
 def get_all_proxies():
 
     response = requests.get(url)
