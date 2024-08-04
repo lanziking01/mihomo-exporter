@@ -1,9 +1,9 @@
 import requests
 import logging
-from flask import Flask, Response
+from fastapi import FastAPI, Response
 from prometheus_client import Gauge, CollectorRegistry, generate_latest
-
-app = Flask(__name__)
+import uvicorn
+app = FastAPI()
 
 url = 'http://198.18.114.2:9090/proxies'
 
@@ -87,7 +87,7 @@ def get_delay(normal_proxies,fast_proxies):
             else:
                 logging.error(f'访问代理{proxy_for_url}失败，请检查代理')
 
-        return Response(generate_latest(registry), mimetype='text/plain')
+        return Response(generate_latest(registry),media_type="text/plain")
 
 @app.route('/metrics')
 def get_all():
@@ -98,4 +98,4 @@ def get_all():
 
 if __name__ == '__main__':
     #start_http_server(9090)
-    app.run(host='0.0.0.0', port=9090)
+    uvicorn.run(app, host='0.0.0.0', port=8000)
